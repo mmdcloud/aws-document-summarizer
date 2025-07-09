@@ -1,0 +1,27 @@
+digraph INFRA {
+  node [ color = "black", fillcolor = "#E6E6E6", height =1, style = "filled,bold,rounded", fontname = "Arial" ];
+  "opensearch-secrets" [ label = "opensearch-secrets
+(AWS::SecretsManager::Secret)", shape =cylinder, fillcolor = "#FFF5CD" ];
+  "document-upload-events-queue" [ label = "document-upload-events-queue
+(AWS::SQS::Queue)", shape =rectangle, fillcolor = "#CCE0AC" ];
+  "document-upload-events-dlq" [ label = "document-upload-events-dlq
+(AWS::SQS::Queue)", shape =rectangle, fillcolor = "#CCE0AC" ];
+  "documents-bucket" [ label = "documents-bucket
+(AWS::S3::Bucket)", shape =cylinder, fillcolor = "#FFF5CD" ];
+  "lambda-function-iam-role" [ label = "lambda-function-iam-role
+(AWS::IAM::Role)", shape =rectangle ];
+  "lambda-function-code" [ label = "lambda-function-code
+(AWS::S3::Bucket)", shape =cylinder, fillcolor = "#FFF5CD" ];
+  "lambda-function" [ label = "lambda-function
+(AWS::Lambda::Function)", shape =rectangle, fillcolor = "#B7E0FF" ];
+  "opensearchdestination" [ label = "opensearchdestination
+(AWS::OpenSearchService::Domain)", shape =cylinder, fillcolor = "#FFCFB3" ];
+  "sqs_event_trigger" [ label = "sqs_event_trigger
+(AWS::Lambda::EventSourceMapping)", shape =rectangle, fillcolor = "#CCE0AC" ];
+  "documents-bucket" -> "document-upload-events-queue";
+  "lambda-function" -> "lambda-function-iam-role";
+  "lambda-function" -> "lambda-function-code";
+  "lambda-function" -> "opensearchdestination";
+  "sqs_event_trigger" -> "document-upload-events-queue";
+  "sqs_event_trigger" -> "lambda-function";
+}
