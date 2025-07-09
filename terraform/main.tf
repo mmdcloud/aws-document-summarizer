@@ -141,7 +141,9 @@ module "lambda_function" {
   role_arn      = module.lambda_function_iam_role.arn
   permissions   = []
   env_variables = {
-    OPENSEARCH_ENDPOINT = module.opensearch.endpoint
+    OPENSEARCH_ENDPOINT = "${module.opensearch.endpoint}"
+    OPENSEARCH_INDEX = "${module.opensearch.index}"
+    AWS_REGION = "${var.region}"
   }
   handler   = "main.lambda_handler"
   runtime   = "python3.12"

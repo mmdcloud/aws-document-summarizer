@@ -1,2 +1,4 @@
-langchain
 opensearch-py
+langchain
+requests
+requests-aws4auth
