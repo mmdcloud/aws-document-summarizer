@@ -142,8 +142,8 @@ module "lambda_function" {
   permissions   = []
   env_variables = {
     OPENSEARCH_ENDPOINT = "${module.opensearch.endpoint}"
-    OPENSEARCH_INDEX = "${module.opensearch.index}"
-    AWS_REGION = "${var.region}"
+    OPENSEARCH_INDEX    = "documents"
+    AWS_REGION          = "${var.region}"
   }
   handler   = "main.lambda_handler"
   runtime   = "python3.12"
